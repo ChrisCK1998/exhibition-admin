@@ -29,7 +29,7 @@ export const constantRouterMap = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    name: 'Dashboard',
+    name: 'dashboard',
     hidden: true,
     children: [{
       path: 'dashboard',
@@ -75,11 +75,69 @@ export const constantRouterMap = [
         ]
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'menu2',
-          name: '展会信息管理' }
+        path: '/exhibition',
+        component: Layout,
+        redirect: '/exhibition/exhibitionInfo/list',
+        name: '展会管理',
+        meta: {
+          title: '展会管理',
+          icon: 'nested'
+        },
+        children: [
+          {
+            path: 'exhibitionInfo',
+            component: () => import('@/views/exhibition/index'), // Parent router-view
+            name: '展会信息管理',
+            meta: { title: '展会信息管理', icon: 'table' },
+            children: [
+              {
+                path: 'list',
+                component: () => import('@/views/exhibition/exhibitionInfo/list'),
+                name: '展会信息列表',
+                meta: { title: '列表', icon: 'table' }
+              },
+              {
+                path: 'add',
+                component: () => import('@/views/exhibition/exhibitionInfo/add'),
+                name: '展会信息添加',
+                meta: { title: '添加', icon: 'tree' }
+              },
+              {
+                path: 'edit/:id',
+                name: '展会信息修改',
+                component: () => import('@/views/exhibition/exhibitionInfo/add'),
+                meta: { title: '编辑', noCache: true },
+                hidden: true
+              }
+            ]
+          }
+        ]
+        // children: [
+        //   {
+        //     path: 'list',
+        //     name: '展会信息查看',
+        //     component: () => import('@/views/tree/index'),
+        //     meta: { title: '展会信息管理', icon: 'table' }
+        //   },
+        //   {
+        //     path: 'add',
+        //     name: '展会信息添加',
+        //     component: () => import('@/views/tree/index'),
+        //     meta: { title: '展会信息添加', icon: 'table' }
+        //   },
+        //   {
+        //     path: 'menu2',
+        //     component: () => import('@/views/tree/index'),
+        //     meta: { title: '邀请函管理' }
+        //   },
+        //   {
+        //     path: 'menu3',
+        //     component: () => import('@/views/tree/index'),
+        //     meta: { title: '会议管理' }
+        //   }
+        // ]
       }
+
     ]
     // children: [
     //   {
@@ -106,6 +164,23 @@ export const constantRouterMap = [
     //   }
     // ]
   },
+  {
+    path: '/dict',
+    component: Layout,
+    redirect: '/dict/list',
+    name: '数据管理',
+    alwaysShow: true,
+    meta: { title: '数据管理', icon: 'example' },
+    children: [
+      {
+        path: 'list',
+        name: '数据字典',
+        component: () => import('@/views/dict/list'),
+        meta: { title: '数据字典', icon: 'table' }
+      }
+    ]
+  },
+
   {
     path: '/visiter',
     component: Layout,
