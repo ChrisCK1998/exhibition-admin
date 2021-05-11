@@ -40,7 +40,7 @@ export const constantRouterMap = [
   {
     path: '/exhibition',
     component: Layout,
-    redirect: '/exhibition/list',
+    redirect: '/exhibition/exhibitionInfo/list',
     name: '展会管理',
     meta: {
       title: '展会管理',
@@ -54,36 +54,23 @@ export const constantRouterMap = [
         meta: { title: '展会信息管理', icon: 'table' },
         children: [
           {
-            path: 'exhibitionInfoList',
+            path: 'list',
             component: () => import('@/views/exhibition/exhibitionInfo/list'),
             name: '展会信息列表',
             meta: { title: '列表', icon: 'table' }
           },
           {
-            path: 'exhibitionInfoAdd',
+            path: 'add',
             component: () => import('@/views/exhibition/exhibitionInfo/add'),
             name: '展会信息添加',
             meta: { title: '添加', icon: 'tree' }
-            // children: [
-            //   {
-            //     path: 'menu1-2-1',
-            //     component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-            //     name: 'Menu1-2-1',
-            //     meta: { title: 'Menu1-2-1' }
-            //   },
-            //   {
-            //     path: 'menu1-2-2',
-            //     component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-            //     name: 'Menu1-2-2',
-            //     meta: { title: 'Menu1-2-2' }
-            //   }
-            // ]
           },
           {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
+            path: 'edit/:id',
+            name: '展会信息修改',
+            component: () => import('@/views/exhibition/exhibitionInfo/add'),
+            meta: { title: '编辑', noCache: true },
+            hidden: true
           }
         ]
       },

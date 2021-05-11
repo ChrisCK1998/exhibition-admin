@@ -57,6 +57,9 @@
             size="mini"
             icon="el-icon-delete"
             @click="removeDataById(scope.row.id)"/>
+          <router-link :to = "'/exhibition/exhibitionInfo/edit/' + scope.row.id">
+            <el-button type="primary" size="mini" icon="el-icon-edit"/>
+          </router-link>
         </template>
       </el-table-column>
 
@@ -131,7 +134,8 @@ export default {
       })
     },
     resetData() {
-      this.getList(1)
+      // this.getList(1)
+      this.$router.push({ path: '/exhibition/exhibitionInfo/exhibitionInfoList' })
     },
     // 当表格复选框选项发生变化的时候触发
     handleSelectionChange(selection) {
