@@ -75,68 +75,33 @@ export const constantRouterMap = [
         ]
       },
       {
-        path: '/exhibition',
-        component: Layout,
-        redirect: '/exhibition/exhibitionInfo/list',
-        name: '展会管理',
-        meta: {
-          title: '展会管理',
-          icon: 'nested'
-        },
+        path: 'inviteInfo',
+        component: () => import('@/views/exhibition/index'), // Parent router-view
+        name: '展会信息管理',
+        meta: { title: '展会信息管理', icon: 'table' },
         children: [
           {
-            path: 'exhibitionInfo',
-            component: () => import('@/views/exhibition/index'), // Parent router-view
-            name: '展会信息管理',
-            meta: { title: '展会信息管理', icon: 'table' },
-            children: [
-              {
-                path: 'list',
-                component: () => import('@/views/exhibition/exhibitionInfo/list'),
-                name: '展会信息列表',
-                meta: { title: '列表', icon: 'table' }
-              },
-              {
-                path: 'add',
-                component: () => import('@/views/exhibition/exhibitionInfo/add'),
-                name: '展会信息添加',
-                meta: { title: '添加', icon: 'tree' }
-              },
-              {
-                path: 'edit/:id',
-                name: '展会信息修改',
-                component: () => import('@/views/exhibition/exhibitionInfo/add'),
-                meta: { title: '编辑', noCache: true },
-                hidden: true
-              }
-            ]
+            path: 'list',
+            component: () => import('@/views/exhibition/exhibitionInfo/list'),
+            name: '展会信息列表',
+            meta: { title: '列表', icon: 'table' }
+          },
+          {
+            path: 'add',
+            component: () => import('@/views/exhibition/exhibitionInfo/add'),
+            name: '展会信息添加',
+            meta: { title: '添加', icon: 'tree' }
+          },
+          {
+            path: 'edit/:id',
+            name: '展会信息修改',
+            component: () => import('@/views/exhibition/exhibitionInfo/add'),
+            meta: { title: '编辑', noCache: true },
+            hidden: true
           }
         ]
-        // children: [
-        //   {
-        //     path: 'list',
-        //     name: '展会信息查看',
-        //     component: () => import('@/views/tree/index'),
-        //     meta: { title: '展会信息管理', icon: 'table' }
-        //   },
-        //   {
-        //     path: 'add',
-        //     name: '展会信息添加',
-        //     component: () => import('@/views/tree/index'),
-        //     meta: { title: '展会信息添加', icon: 'table' }
-        //   },
-        //   {
-        //     path: 'menu2',
-        //     component: () => import('@/views/tree/index'),
-        //     meta: { title: '邀请函管理' }
-        //   },
-        //   {
-        //     path: 'menu3',
-        //     component: () => import('@/views/tree/index'),
-        //     meta: { title: '会议管理' }
-        //   }
-        // ]
       }
+
 
     ]
     // children: [
