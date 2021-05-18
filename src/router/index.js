@@ -25,16 +25,33 @@ export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login/index'), hidden: true },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
 
+  // {
+  //   path: '/',
+  //   component: Layout,
+  //   redirect: '/dashboard',
+  //   name: '首页',
+  //   hidden: true,
+  //   meta: {
+  //     title: '展会管理',
+  //     icon: 'nested'
+  //   },
+  //   children: [{
+  //     path: 'dashboard',
+  //     component: () => import('@/views/dashboard/index')
+  //   }]
+  // },
+
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
-    name: 'dashboard',
-    hidden: true,
-    children: [{
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
-    }]
+    children: [
+      {
+        path: '/',
+        component: () => import('@/views/dashboard/index'),
+        name: '首页',
+        meta: { title: '首页', icon: 'el-icon-s-home', noCache: true }
+      }
+    ]
   },
 
   {
@@ -57,12 +74,13 @@ export const constantRouterMap = [
             path: 'list',
             component: () => import('@/views/exhibition/exhibitionInfo/list'),
             name: '展会信息列表',
-            meta: { title: '列表', icon: 'table' }
+            meta: { title: '展会信息列表', icon: 'table' }
           },
           {
             path: 'add',
             component: () => import('@/views/exhibition/exhibitionInfo/add'),
             name: '展会信息添加',
+            hidden: true,
             meta: { title: '添加', icon: 'tree' }
           },
           {
@@ -77,7 +95,35 @@ export const constantRouterMap = [
       {
         path: 'inviteInfo',
         component: () => import('@/views/exhibition/index'), // Parent router-view
-        name: '展会信息管理',
+        name: '邀请函管理',
+        meta: { title: '邀请函管理', icon: 'table' },
+        children: [
+          {
+            path: 'list',
+            component: () => import('@/views/exhibition/inviteInfo/list'),
+            name: '邀请函信息列表',
+            meta: { title: '邀请函信息列表', icon: 'table' }
+          },
+          {
+            path: 'add',
+            component: () => import('@/views/exhibition/inviteInfo/add'),
+            name: '邀请函信息添加',
+            hidden: true,
+            meta: { title: '添加', icon: 'tree' }
+          },
+          {
+            path: 'edit/:id',
+            name: '邀请函信息修改',
+            component: () => import('@/views/exhibition/inviteInfo/add'),
+            meta: { title: '编辑', noCache: true },
+            hidden: true
+          }
+        ]
+      },
+      {
+        path: 'meetInfo',
+        component: () => import('@/views/exhibition/index'), // Parent router-view
+        name: '会议管理',
         meta: { title: '展会信息管理', icon: 'table' },
         children: [
           {
@@ -101,7 +147,6 @@ export const constantRouterMap = [
           }
         ]
       }
-
 
     ]
     // children: [
@@ -129,42 +174,72 @@ export const constantRouterMap = [
     //   }
     // ]
   },
-  {
-    path: '/dict',
-    component: Layout,
-    redirect: '/dict/list',
-    name: '数据管理',
-    alwaysShow: true,
-    meta: { title: '数据管理', icon: 'example' },
-    children: [
-      {
-        path: 'list',
-        name: '数据字典',
-        component: () => import('@/views/dict/list'),
-        meta: { title: '数据字典', icon: 'table' }
-      }
-    ]
-  },
 
   {
-    path: '/visiter',
+    path: '/unit',
     component: Layout,
-    redirect: '/exhibition/menu1',
-    name: '参展管理',
+    redirect: '/unit/index',
+    name: '展商管理',
     meta: {
-      title: '参展管理',
+      title: '单位管理',
       icon: 'nested'
     },
     children: [
       {
-        path: 'menu1',
-        component: () => import('@/views/exhibition/exhibitionInfo/add'),
-        meta: { title: '参展单位管理' }
+        path: 'unitInfo',
+        component: () => import('@/views/unit/index'), // Parent router-view
+        name: '单位管理',
+        meta: { title: '单位管理', icon: 'table' },
+        children: [
+          {
+            path: 'list',
+            component: () => import('@/views/unit/unitInfo/list'),
+            name: '单位信息列表',
+            meta: { title: '单位信息列表', icon: 'table' }
+          },
+          {
+            path: 'add',
+            hidden: true,
+            component: () => import('@/views/unit/unitInfo/add'),
+            name: '单位信息添加',
+            meta: { title: '添加', icon: 'tree' }
+          },
+          {
+            path: 'edit/:id',
+            name: '单位信息修改',
+            component: () => import('@/views/unit/unitInfo/add'),
+            meta: { title: '编辑', noCache: true },
+            hidden: true
+          }
+        ]
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/tree/index'),
-        meta: { title: '单位人员管理' }
+        path: 'visitInfo',
+        component: () => import('@/views/unit/index'), // Parent router-view
+        name: '员工管理',
+        meta: { title: '员工管理', icon: 'table' },
+        children: [
+          {
+            path: 'list',
+            component: () => import('@/views/unit/visitInfo/list'),
+            name: '员工信息列表',
+            meta: { title: '员工信息列表', icon: 'table' }
+          },
+          {
+            path: 'add',
+            hidden: true,
+            component: () => import('@/views/unit/visitInfo/add'),
+            name: '员工信息添加',
+            meta: { title: '添加', icon: 'tree' }
+          },
+          {
+            path: 'edit/:id',
+            name: '员工信息修改',
+            component: () => import('@/views/unit/visitInfo/add'),
+            meta: { title: '编辑', noCache: true },
+            hidden: true
+          }
+        ]
       }
     ]
   },
@@ -225,110 +300,122 @@ export const constantRouterMap = [
       {
         path: 'menu1',
         component: () => import('@/views/tree/index'),
-        meta: { title: '展会信息管理' }
+        meta: { title: '前台用户' }
       },
       {
         path: 'menu2',
         component: () => import('@/views/tree/index'),
-        meta: { title: '邀请函管理' }
-      },
-      {
-        path: 'menu3',
-        component: () => import('@/views/tree/index'),
-        meta: { title: '会议管理' }
+        meta: { title: '后台管理员用户' }
       }
     ]
   },
 
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
+  // {
+  //   path: '/example',
+  //   component: Layout,
+  //   redirect: '/example/table',
+  //   name: 'Example',
+  //   meta: { title: 'Example', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'table',
+  //       name: 'Table',
+  //       component: () => import('@/views/table/index'),
+  //       meta: { title: 'Table', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'tree',
+  //       name: 'Tree',
+  //       component: () => import('@/views/tree/index'),
+  //       meta: { title: 'Tree', icon: 'tree' }
+  //     }
+  //   ]
+  // },
+  //
+  // {
+  //   path: '/form',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Form',
+  //       component: () => import('@/views/form/index'),
+  //       meta: { title: 'Form', icon: 'form' }
+  //     }
+  //   ]
+  // },
+  //
+  // {
+  //   path: '/nested',
+  //   component: Layout,
+  //   redirect: '/nested/menu1',
+  //   name: 'Nested',
+  //   meta: {
+  //     title: 'Nested',
+  //     icon: 'nested'
+  //   },
+  //   children: [
+  //     {
+  //       path: 'menu1',
+  //       component: () => import('@/views/nested/menu1/index'), // Parent router-view
+  //       name: 'Menu1',
+  //       meta: { title: 'Menu1' },
+  //       children: [
+  //         {
+  //           path: 'menu1-1',
+  //           component: () => import('@/views/nested/menu1/menu1-1'),
+  //           name: 'Menu1-1',
+  //           meta: { title: 'Menu1-1' }
+  //         },
+  //         {
+  //           path: 'menu1-2',
+  //           component: () => import('@/views/nested/menu1/menu1-2'),
+  //           name: 'Menu1-2',
+  //           meta: { title: 'Menu1-2' },
+  //           children: [
+  //             {
+  //               path: 'menu1-2-1',
+  //               component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
+  //               name: 'Menu1-2-1',
+  //               meta: { title: 'Menu1-2-1' }
+  //             },
+  //             {
+  //               path: 'menu1-2-2',
+  //               component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
+  //               name: 'Menu1-2-2',
+  //               meta: { title: 'Menu1-2-2' }
+  //             }
+  //           ]
+  //         },
+  //         {
+  //           path: 'menu1-3',
+  //           component: () => import('@/views/nested/menu1/menu1-3'),
+  //           name: 'Menu1-3',
+  //           meta: { title: 'Menu1-3' }
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       path: 'menu2',
+  //       component: () => import('@/views/nested/menu2/index'),
+  //       meta: { title: 'menu2' }
+  //     }
+  //   ]
+  // },
 
   {
-    path: '/form',
+    path: '/dict',
     component: Layout,
+    redirect: '/dict/list',
+    name: '数据管理',
+    alwaysShow: true,
+    meta: { title: '数据管理', icon: 'example' },
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'menu2' }
+        path: 'list',
+        name: '数据字典',
+        component: () => import('@/views/dict/list'),
+        meta: { title: '数据字典', icon: 'table' }
       }
     ]
   },

@@ -13,7 +13,8 @@
             首页
           </el-dropdown-item>
         </router-link>
-        <router-link to="/profile/index">
+        <!--        <router-link to="/profile/index">-->
+        <router-link to="/system/center">
           <el-dropdown-item>
             个人信息
           </el-dropdown-item>

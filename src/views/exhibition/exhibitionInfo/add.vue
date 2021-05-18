@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form label-width="120px">
+    <el-form :label-position="left" label-width="120px">
       <el-form-item label="编号">
         <el-input v-model="exhibitionSet.exCode"/>
       </el-form-item>
@@ -14,25 +14,19 @@
         <el-input v-model="exhibitionSet.exVenue"/>
       </el-form-item>
       <el-form-item label="展会时间">
-        <!--        <el-input v-model="exhibitionSet.exST"/>-->
         <el-date-picker
           v-model="exhibitionSet.exST"
           type="datetime"
           placeholder="选择开始时间"
           value-format="yyyy-MM-dd HH:mm:ss"/>
-        <el-col :span="2" class="line">-</el-col>
+        <!--        <el-col :span="2" class="line">-</el-col>-->
+        ——
         <el-date-picker
           v-model="exhibitionSet.exET"
           type="datetime"
           placeholder="选择结束时间"
           value-format="yyyy-MM-dd HH:mm:ss"/>
       </el-form-item>
-      <!--      format="yyyy 年 MM 月 dd 日 HH 时 mm 分 ss 秒"-->
-      <!--      <el-form-item label="结束时间">-->
-      <!--        &lt;!&ndash;        <el-input v-model="exhibitionSet.exET"/>&ndash;&gt;-->
-      <!--        -->
-      <!--      </el-form-item>-->
-
       <el-form-item label="参展商要求">
         <el-input v-model="exhibitionSet.exRequire"/>
       </el-form-item>
